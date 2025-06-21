@@ -5,7 +5,7 @@ from io import BytesIO
 import face_recognition
 import numpy as np
 from face_recognition.api import _css_to_rect, \
-    pose_predictor_68_point, pose_predictor_5_point, face_encoder
+    pose_predictor_68_point, pose_predictor_5_point, face_encoder, face_recognition_densenet_model_v1
 
 from app.exceptions.errors import AppImageProcessingError
 
@@ -33,10 +33,12 @@ def face_locations(image, number_of_times_to_upsample, model):
 
 def raw_face_landmarks(face_image, face_locs, model):
     face_locs = [_css_to_rect(face_location) for face_location in face_locs]
-    pose_predictor = pose_predictor_68_point
-
     if model == "small":
         pose_predictor = pose_predictor_5_point
+    elif model == "xlarge":
+        pose_predictor = face_recognition_densenet_model_v1
+    else:
+        pose_predictor = pose_predictor_68_point
 
     return [pose_predictor(face_image, face_location) for face_location in face_locs]
 
