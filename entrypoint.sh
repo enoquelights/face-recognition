@@ -1,1 +1,1 @@
-uwsgi uwsgi.ini
+uwsgi /opt/app/uwsgi.ini
