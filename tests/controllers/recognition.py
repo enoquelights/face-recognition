@@ -3,8 +3,9 @@ import json
 import logging
 import os
 import unittest
+import sys
 from os.path import dirname
-
+sys.path.insert(0, os.path.abspath('/opt/app'))
 from app import create_app
 
 
