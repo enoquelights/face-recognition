@@ -9,3 +9,25 @@ services:
     volumes:
       - ./logs:/var/log/face-recognition/
     command: sh ./entrypoint.sh
+
+# Compuse for CUDA GPU
+face-recognition-cuda:
+    image: facecuda12:1
+    ports:
+      - 5001:5001
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+                  
+    environment:    
+      TZ: Europe/London
+      PUID: 1000
+      PGID: 1000
+      APP_CONFIG: /opt/app/app/config/prod.cfg
+    volumes:
+      - path/to/logs:/var/log/face-recognition/      
+    command: "sh /opt/app/entrypoint.sh"
