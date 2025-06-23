@@ -2,7 +2,8 @@ import base64
 import os
 import unittest
 from os.path import dirname
-
+import sys
+sys.path.insert(0, os.path.abspath('/opt/app'))
 from app.services.recognition import distance, load, face_locations, raw_face_landmarks
 
 
